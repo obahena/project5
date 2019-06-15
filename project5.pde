@@ -3,8 +3,9 @@
 FloatTable data;
 int [] years;
 float [] emissions;
-int yearMin, yearMax;
+int yearMin, yearMax,rowCount;
 float dataMin,dataMax,plotX1,plotY1,plotX2,plotY2;
+int yearInterval=5;
 
 void setup(){
   size(720,480);
@@ -12,7 +13,7 @@ void setup(){
   //Initialize data
   String datapath = "/data/USmethaneemissions.txt";
   data = new FloatTable(datapath);
-  int rowCount = data.getRowCount();
+  rowCount = data.getRowCount();
   
   String[] lines = loadStrings(datapath);
   years = new int[rowCount];
@@ -47,6 +48,8 @@ void draw(){
   noStroke();
   rect(plotX1,plotY1,plotX2,plotY2);
   
+  drawYearLabels();
+  
   strokeWeight(5);
   stroke(#5679C1);
   drawDataPoints(1);
@@ -61,5 +64,23 @@ void drawDataPoints(int col){
       float y = map(value, dataMin,dataMax,plotY2,plotY1);
       point(x,y);
       }
+  }
+}
+
+void drawYearLabels(){
+  fill(0);
+  textSize(10);
+  textAlign(CENTER,TOP);
+  
+  //Draw grid
+  stroke(224);
+  strokeWeight(1);
+  
+  for( int row =0; row <rowCount; row++){
+  if(years[row] % yearInterval ==0) {
+    float x = map(years[row],yearMin,yearMax,plotX1,plotX2);
+    text(years[row],x,plotY2+5);
+    line(x,plotY1,x,plotY2);
+    }
   }
 }
