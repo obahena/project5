@@ -9,8 +9,8 @@ int yearMin, yearMax;
 int rowCount;
 float dataMin,dataMax,plotX1,plotY1,plotX2,plotY2,labelX,labelY;
 int yearInterval = 1;
-int emissionsInterval = 7000;
-int emissionsIntervalMinor = 100;
+int emissionsInterval = 5000;
+int emissionsIntervalMinor = 50000;
 PFont plotFont;
 
 ////////////////////////
@@ -39,14 +39,15 @@ void setup(){
   years = int(data.getRowNames());
   yearMin = years[years.length-1];
   yearMax = years[0];
-  dataMax = (round(data.getColumnMax(0))+5000);//data.getTableMax();
-  dataMin = (round(data.getColumnMin(0))-1000);
+  dataMax = (round(data.getTableMax()));
+  dataMin = 0;//(round(data.getTableMin()));
   
-  //println(years);
-  //println(yearMax);
-  //println(yearMin);
-  //println(dataMax);
-  //println(dataMin);
+  println(columnCount);
+  println(years);
+  println(yearMax);
+  println(yearMin);
+  println(dataMax);
+  println(dataMin);
   
   //Create plot area
   plotX1 = 250;
@@ -89,7 +90,7 @@ void draw(){
    drawAxisLabels();
    drawXDataLabels();
    drawYDataLabels();
-   //drawTitleTabs();
+   drawTitleTabs();
    drawDataLine(currentColumn); //1
    dataHighlight(currentColumn); //1
    drawDataPoints(currentColumn); //1
@@ -105,7 +106,7 @@ void draw(){
 void drawTitle(){
   fill(0);
   textSize(35);
-  textAlign(CENTER);
+  textAlign(LEFT);
   //textLeading(15);
   text("Country Methane Emissions ", (plotX1+plotX2)/2, plotY1 - 10);
   //text("Country Methane emissions ",(plotX1+plotX2)/2,plotY1-30);
