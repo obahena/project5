@@ -1,29 +1,28 @@
-Country or Area|Year|Value
-United States of America|2016|657439.823843596
-United States of America|2015|665381.403482036
-United States of America|2014|663961.12285557
-United States of America|2013|662552.604931492
-United States of America|2012|662501.260316881
-United States of America|2011|672405.167075556
-United States of America|2010|693630.829697295
-United States of America|2009|691997.974947283
-United States of America|2008|697810.961540445
-United States of America|2007|689863.239153087
-United States of America|2006|688610.750524577
-United States of America|2005|688606.981984315
-United States of America|2004|684424.774440636
-United States of America|2003|693749.054868357
-United States of America|2002|694008.064078073
-United States of America|2001|702968.869640872
-United States of America|2000|709233.59673864
-United States of America|1999|717558.620899164
-United States of America|1998|728650.876935034
-United States of America|1997|743357.026211823
-United States of America|1996|758666.158190576
-United States of America|1995|767225.641005245
-United States of America|1994|774603.672507164
-United States of America|1993|769973.082106607
-United States of America|1992|783595.662564542
-United States of America|1991|784557.250686313
-United States of America|1990|779942.238765189
-
+Year	Value	Country_or_Area
+2016	657439.8238	United States of America
+2015	665381.4035	United States of America
+2014	663961.1229	United States of America
+2013	662552.6049	United States of America
+2012	662501.2603	United States of America
+2011	672405.1671	United States of America
+2010	693630.8297	United States of America
+2009	691997.9749	United States of America
+2008	697810.9615	United States of America
+2007	689863.2392	United States of America
+2006	688610.7505	United States of America
+2005	688606.982	United States of America
+2004	684424.7744	United States of America
+2003	693749.0549	United States of America
+2002	694008.0641	United States of America
+2001	702968.8696	United States of America
+2000	709233.5967	United States of America
+1999	717558.6209	United States of America
+1998	728650.8769	United States of America
+1997	743357.0262	United States of America
+1996	758666.1582	United States of America
+1995	767225.641	United States of America
+1994	774603.6725	United States of America
+1993	769973.0821	United States of America
+1992	783595.6626	United States of America
+1991	784557.2507	United States of America
+1990	779942.2388	United States of America

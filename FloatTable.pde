@@ -18,7 +18,7 @@ class FloatTable {
   FloatTable(String filename) {
     String[] rows = loadStrings(filename);
     
-    String[] columns = split(rows[0], "|");
+    String[] columns = split(rows[0], TAB);
     columnNames = subset(columns, 1); // upper-left corner ignored
     scrubQuotes(columnNames);
     columnCount = columnNames.length;
@@ -36,7 +36,7 @@ class FloatTable {
       }
 
       // split the row on the tabs
-      String[] pieces = split(rows[i], "|");
+      String[] pieces = split(rows[i], TAB);
       scrubQuotes(pieces);
       
       // copy row title
