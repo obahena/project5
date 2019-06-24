@@ -1,7 +1,15 @@
-//Beginning of Project 5
+/**********************************************
+Authors: Katherine Mains, Bailey Cook, and Omar Bahena
+
+Functionality: 
+  1. Space bar to toggle between countries
+  2. Click to add/remove grid lines
+************************************************/
 
 
+//Project 5
 //Initialize global variables
+
 FloatTable data;
 int [] years;
 float [] emissions;
@@ -9,7 +17,7 @@ int yearMin, yearMax;
 int rowCount;
 float dataMin,dataMax,plotX1,plotY1,plotX2,plotY2,labelX,labelY;
 int yearInterval = 1;
-int emissionsInterval = 5000;
+int emissionsInterval = 500000;
 int emissionsIntervalMinor = 50000;
 PFont plotFont;
 
@@ -28,18 +36,21 @@ float zoom = 1;
 float tabTop, tabBottom;
 float[] tabLeft, tabRight;
 float tabPad = 10;
+
+String dataTitle = "USA Gas Emissions";
 //////////////////////////
 void setup(){
   size(1120,720);
+  smooth();
   
   //Initialize data
-  String datapath = "/data/USmethaneemissions.txt";
+  String datapath = "/data/USgases.tsv";
   data = new FloatTable(datapath);
   columnCount = data.getColumnCount();
   years = int(data.getRowNames());
   yearMin = years[years.length-1];
   yearMax = years[0];
-  dataMax = (round(data.getTableMax()));
+  dataMax = data.getTableMax() + 500000;
   dataMin = 0;//(round(data.getTableMin()));
   
   println(columnCount);
@@ -67,10 +78,7 @@ void setup(){
      interpolators[row] = new Integrator(initialValue);
      interpolators[row].attraction = 0.5; 
    }
-   
   updateNum = 0;
-
-  smooth();
 }
 
 void draw(){
@@ -86,7 +94,7 @@ void draw(){
    scale(zoom);
   
   //drawing grids, labels, and plot
-   drawTitle(); 
+   drawTitle(dataTitle); 
    drawAxisLabels();
    drawXDataLabels();
    drawYDataLabels();
@@ -103,13 +111,12 @@ void draw(){
 }
 
 //Draw chart Title
-void drawTitle(){
+void drawTitle(String dataTitle){
   fill(0);
   textSize(35);
   textAlign(LEFT);
   //textLeading(15);
-  text("Country Methane Emissions ", (plotX1+plotX2)/2, plotY1 - 10);
-  //text("Country Methane emissions ",(plotX1+plotX2)/2,plotY1-30);
+  text(dataTitle, (plotX1+plotX2)/2, plotY1 - 10);
 }
 
 void drawAxisLabels(){
@@ -118,12 +125,10 @@ void drawAxisLabels(){
   textLeading(15);
   
   textAlign(CENTER);
-  text("Methane Emissions\n in kilotonne\n CO2 equivalent",labelX-50,(plotY1+plotY2)/2);
+  text("Emissions\n in kilotonne\n CO2 equivalent",labelX-50,(plotY1+plotY2)/2);
   textAlign(CENTER);
   text("Year",(plotX1+plotX2)/2, labelY);
 }
-
-boolean spaceBarToggle = false;
 
 //Drawing grid and years on X Axis
 void drawXDataLabels(){
@@ -134,7 +139,6 @@ void drawXDataLabels(){
   // Use thin, gray lines to draw the grid.
   stroke(224);
   strokeWeight(1);
-
 
   for (int row = 0; row < rowCount; row++) {
     if (years[row] % yearInterval == 0) {
@@ -228,7 +232,8 @@ void dataHighlight(int col){
              // We want to generate the text over the point
              textSize(15);
              textAlign(CENTER);
-             text( nf(value, 0, 2) + "(" + years[row] + " )" , x, y -10);
+             fill(#FF0000);
+             text( nf(value, 0, 2) + "" , x, y -10);
             
           }
       }
@@ -283,6 +288,7 @@ void mousePressed() {
       }
     }
   }
+  print("currentcolumn : "+currentColumn);
 }
 
 void setColumn(int col) {
@@ -297,11 +303,36 @@ void setColumn(int col) {
   
 }
 
-void mouseWheel( MouseEvent event) {
-  
-  xTrans = xTrans-event.getCount()*(mouseX)/100;
-  yTrans = yTrans-event.getCount()*(mouseY)/100;
-  zoom += event.getAmount() / 100;
-  
-  
+void keyPressed(  ) {
+  if (key == ' ') {
+    updateTable(  );
+  }
+}
+
+void updateTable(  ) {
+  if(updateNum == 0) {
+    data = new FloatTable("/data/USgases.tsv");
+    for (int row = 0; row < rowCount; row++) {
+      float initialValue = data.getFloat(row, currentColumn);
+      interpolators[row] = new Integrator(initialValue);
+    }
+    dataTitle = "USA Gas Emissions";
+    updateNum = 1;
+  } else  if(updateNum == 1) {
+    data = new FloatTable("/data/Germanygases.tsv");
+    for (int row = 0; row < rowCount; row++) {
+      float initialValue = data.getFloat(row, currentColumn);
+      interpolators[row] = new Integrator(initialValue);
+     }
+    dataTitle = "Germany Gas Emissions";
+    updateNum = 2;
+  } else if(updateNum == 2){ 
+    data = new FloatTable("/data/Russiagases.tsv");
+    for (int row = 0; row < rowCount; row++) {
+      float initialValue = data.getFloat(row, currentColumn);
+      interpolators[row] = new Integrator(initialValue);
+     }
+    dataTitle = "Russia Gas Emissions";
+    updateNum = 0;
+  }
 }
