@@ -1,5 +1,5 @@
 /**********************************************
-Authors: Katherine Maines, Bailey Cook, and Omar Bahena
+Authors: Katherine Mains, Bailey Cook, and Omar Bahena
 
 Functionality: 
   1. Space bar to toggle between countries
